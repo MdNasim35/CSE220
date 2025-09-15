@@ -1,0 +1,148 @@
+#task1
+def check_similar(building_1, building_2):
+
+
+      c1=count(building_1)
+      c2=count(building_2)
+      temp1= building_1
+      temp2= building_2
+
+
+      if c1!=c2:
+        return  'Not Similar'
+      else:
+         while temp1!=None :
+             if temp1.elem!=temp2.elem:
+                 return "Not Similar"
+             temp1=temp1.next
+             temp2=temp2.next
+         return "Similar"
+def count (head):
+  temp=head
+  c=0
+  while temp!=None:
+      temp=temp.next
+      c+=1
+  return c
+
+
+
+
+#Task2
+def sum_dist(head, arr):
+    sum=0
+    lenarr=len(arr)
+    for i in range(0,lenarr,1):
+         sum+=elemAt(head,arr[i])
+    return sum
+
+
+def elemAt(head,idx):
+    temp=head
+    c=0
+    while temp!=None:
+        if c==idx:
+           return temp.elem
+        temp=temp.next
+        c+=1
+    return 0
+
+
+def count(head):
+     temp=head
+     c=0
+     while temp!=None :
+          temp=temp.next
+          c+=1
+     return c
+
+
+
+
+#task3
+def alternate_merge(head1, head2):
+      temp1=head1
+      temp2=head2
+      while temp1!=None and temp2!=None:
+           n=temp1.next
+           temp1.next=temp2
+           p=temp2.next
+           temp2.next=n
+           temp1=n
+           temp2=p
+      return head1
+
+
+
+
+#task4
+def idGenerator(head1, head2, head3):
+  temp1=head1
+  new_head=None
+  tail=temp1
+  while temp1!=None:
+      n= temp1.next
+      temp1.next=new_head
+      new_head=temp1
+      temp1= n
+
+
+
+
+  temp2= head2
+  temp3= head3
+  while temp2!=None:
+       num=temp2.elem +temp3.elem
+       if num>=10:
+          num=num%10
+       temp2.elem=num
+       temp2=temp2.next
+       temp3=temp3.next
+  tail.next=head2
+  return new_head
+
+
+
+
+#task5
+def sumOddAppend( head ):
+    n = head.next
+    sum = 0
+    p = head
+    while n !=head:
+              if n.elem % 2 != 0:
+                sum += n.elem
+                p.next= n.next
+              else:
+                  p = n
+              n = n.next
+
+
+    sumNode= Node(sum)
+    p.next =sumNode
+    sumNode.next=head
+
+
+    return head
+
+
+
+
+#task6
+def pairJoin( dhead1, dhead2 ):
+      temp1 = dhead1.next
+      temp2 = dhead2.next
+      tail = dhead1
+      while temp1 != None and temp2 != None:
+          tail.next = temp1
+          temp1.prev = tail
+          tail = temp1
+          temp1 = temp1.next
+
+
+          tail.next = temp2
+          temp2.prev = tail
+          tail = temp2
+          temp2 = temp2.next
+      tail.next = dhead1
+      dhead1.prev = tail
