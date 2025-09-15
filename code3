@@ -1,0 +1,89 @@
+#Assignment6 
+
+#Task4
+def swap_child(root, level, M):
+    if root == None:
+        return None
+    if level < M:
+        temp = root.left
+        root.left = root.right
+        root.right = temp
+        swap_child(root.left, level + 1, M)
+        swap_child(root.right, level + 1, M)
+    return root
+
+
+#Task5
+def subtract_summation(root):
+    
+      def sum(node):
+            if node == None:
+                return 0
+                
+            return node.elem + sum(node.left) + sum(node.right)
+
+      if root == None:
+          return 0
+      left_ttl = sum(root.left)
+      right_ttl = sum(root.right)
+
+      return left_ttl - right_ttl
+
+#Task6
+def level_sum(root):
+    def helper(node,lvl):
+        if node is None:
+            return 0
+        if lvl % 2 == 1:
+           cur = node.elem
+        else:
+            cur = -node.elem
+        return cur + helper(node.left, lvl + 1) + helper(node.right, lvl + 1)
+    return helper(root,0)
+
+
+
+#Assignment7
+
+#Task4
+def rangeSum(root, low, high):
+      if root== None:
+           return 0
+      if root.elem < low:      
+           return rangeSum(root.right, low, high)
+      if root.elem > high:        
+           return rangeSum(root.left, low, high)
+      
+      return root.elem + rangeSum(root.left, low, high) + rangeSum(root.right, low, high)
+
+
+
+#Task5
+def mirror_sum(root):
+    if root == None:
+        return 0
+
+    def helper(p,m):
+        if p==None or m==None:
+            return 0
+        return p.elem + m.elem + helper(p.left, m.right) + helper(p.right, m.left)
+
+    return helper(root.left,root.right)
+
+
+#Task6
+def isBST(root):
+    def helper(node, low, up):
+        if node == None:
+          return True
+        if up != None and node.elem >= up:
+          return False
+        if low != None and node.elem <= low:
+          return False
+
+        lef = helper(node.left, low, node.elem)
+        righ = helper(node.right, node.elem, up)
+
+        return lef and righ
+
+    return helper(root, None, None)
