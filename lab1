@@ -1,0 +1,111 @@
+Linear Array
+
+#task1
+def mergeSortedArray(arr1, arr2):
+    
+    i=0
+    j=0
+    merged = np.zeros(len(arr1) + len(arr2), dtype=arr1.dtype)
+    k = 0
+    
+    while i < len(arr1) and j < len(arr2):
+        if arr1[i] < arr2[j]:
+            merged[k] = arr1[i]
+            i += 1
+        else:
+            merged[k] = arr2[j]
+            j += 1
+        k += 1
+    
+    while i < len(arr1):
+        merged[k] = arr1[i]
+        i += 1
+        k += 1
+    
+    while j < len(arr2):
+        merged[k] = arr2[j]
+        j += 1
+        k += 1
+    
+    return merged
+
+
+#task2
+def mostWater(arr):
+    left = 0
+    right= len(height) - 1
+    max_area = 0
+    
+    while left < right:
+        if height[left] < height[right]:
+            y = height[left]
+        else:
+            y = height[right]
+        
+        x = right - left
+        area = x* y
+        
+        if area > max_area:
+            max_area = area
+        
+        if height[left] < height[right]:
+            left +=1
+        else:
+            right -=1
+    
+    print(max_area)
+
+
+
+
+
+
+#task3
+def check_similar(building_1, building_2):
+
+  tem= building_1
+  num= building_2
+  c= 0
+  add= 0
+  while tem!= None:
+      c+=1
+      tem=tem.next
+  while num!= None:
+        add+= 1
+        num=num.next
+  tem= building_1
+  num= building_2
+  if add!= c:
+     return "Not Similar"
+  else:
+      while tem!= None:
+        if tem.elem!=num.elem:
+          return "Not Similar"
+        tem= tem.next
+        num= num.next
+      return "Similar"
+
+
+
+
+#task4
+def assemble_conga_line(conga_line):
+  tem=conga_line
+  while tem.next!=None:
+      if tem.next.elem < tem.elem or  tem.next.elem == tem.elem:
+           return False
+      tem=tem.next
+  return True
+
+
+#task5
+def sum_dist(head, arr):
+        total = 0
+        for index in arr:
+            curr = head
+            for i in range(index):
+                if curr !=None:
+                    curr = curr.next
+            if curr != None:
+                total += curr.elem
+        return total
